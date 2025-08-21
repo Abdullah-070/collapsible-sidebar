@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1: Collapsible Sidebar</title>
+    <link rel="stylesheet" href="sidebar-styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Toggle Button -->
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+        </button>
+
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <!-- Logo placeholder -->
+            <div class="logo-placeholder">
+                <div class="logo-icon">LOGO</div>
+            </div>
+
+            <!-- Navigation links -->
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="icon">🏠</span>
+                        <span class="text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="icon">👤</span>
+                        <span class="text">Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="icon">📊</span>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="icon">⚙️</span>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="icon">📞</span>
+                        <span class="text">Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <h1>Main Content Area</h1>
+            <p>This is the main content area. Click the hamburger menu to toggle the sidebar.</p>
+            <p>The sidebar includes smooth animations and is fully responsive on mobile devices.</p>
+        </main>
+
+        <!-- Overlay for mobile -->
+        <div class="overlay" id="overlay"></div>
+    </div>
+
+    <script>
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            body.classList.toggle('sidebar-open');
+            
+            // Animate hamburger menu
+            sidebarToggle.classList.toggle('active');
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !sidebarToggle.contains(e.target) && 
+                sidebar.classList.contains('active')) {
+                toggleSidebar();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('sidebar-open');
+                sidebarToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
